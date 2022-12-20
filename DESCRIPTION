@@ -2,7 +2,8 @@ Package: pathml
 Title: A friendly toolkit for Computational Pathology
 Version: 0.0.0.9000
 Authors@R:
-    person("Lucio Rezende", "Queiroz", , "luciorqueiroz@gmail.com", role = c("aut", "cre"),
+    person("Lucio Rezende", "Queiroz", , "luciorqueiroz@gmail.com",
+    role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6090-1834"))
 Description: PathML is a toolbox to facilitate machine learning workflows
    for high-resolution whole-slide pathology images.
@@ -16,3 +17,8 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Imports: 
+    cli,
+    reticulate,
+    stringr,
+    withr

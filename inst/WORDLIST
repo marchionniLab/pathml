@@ -1,6 +1,7 @@
 aut
 BugReports
 ci
+cli
 cre
 Farber
 github
@@ -16,9 +17,12 @@ pathml
 PathML
 pre
 Queiroz
+reticulate
 Rezende
 rmarkdown
 Roxygen
 RoxygenNote
+stringr
 sublicense
 VignetteBuilder
+withr

@@ -1,0 +1,7 @@
+^LICENSE\.md$
+^\.Rproj\.user$
+^\.pre-commit-config\.yaml$
+^_pkgdown\.yml$
+^docs$
+^pathml\.Rproj$
+^pkgdown$

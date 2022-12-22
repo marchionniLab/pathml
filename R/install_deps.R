@@ -5,19 +5,32 @@
 #'   This function will install the system dependencies into a
 #'   conda environment called `pathml-r`.
 #' @param env_name (optional) name of conda environment to install
-#'   dependencies into.
+#'  dependencies into. Default is `pathml-r`.
+#' @param rebuild (optional) rebuild the conda environment. Default is `FALSE`.
+#'
 #' @export
-install_deps <- function(env_name = "pathml-r") {
+install_deps <- function(env_name = "pathml-r", rebuild = FALSE) {
+  # TODO: @luciorq Opts and Vars to overwrite
+  # + option(reticulate.conda_binary = NULL)
+  # + RETICULATE_CONDA=''
+  # + RETICULATE_MINICONDA_PATH
+
   # Check if conda is installed
-  if (!isTRUE(stringr::str_detect(reticulate::conda_binary(), "conda"))) {
-    reticulate::install_miniconda()
+  if (!fs::file_exists(
+    fs::path(reticulate::miniconda_path(), "bin", "conda")
+  )) {
+    reticulate::install_miniconda(
+      update = TRUE,
+      force = TRUE
+    )
   }
 
   # Check if environment exists
   env_list <- reticulate::conda_list()
 
   if (isTRUE(
-    Sys.info()["machine"] %in% "arm64" && Sys.info()["sysname"] %in% "Darwin"
+    Sys.info()["machine"] %in% "arm64" &&
+      Sys.info()["sysname"] %in% "Darwin"
   )) {
     cli::cli_abort(
       message =
@@ -50,7 +63,8 @@ install_deps <- function(env_name = "pathml-r") {
         "pydicom==2.2.2",
         "pytest==6.2.5",
         "pre-commit==2.16.0",
-        "coverage==5.5"
+        "coverage==5.5",
+        "openslide==3.4.1"
       ),
       channel = c(
         "conda-forge",

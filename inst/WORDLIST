@@ -1,5 +1,6 @@
 aut
 BugReports
+callr
 ci
 cli
 conda
@@ -23,6 +24,7 @@ pre
 Queiroz
 reticulate
 Rezende
+rlang
 rmarkdown
 Roxygen
 RoxygenNote

@@ -1,6 +1,6 @@
 Package: pathml
 Title: A friendly toolkit for Computational Pathology
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R:
     person("Lucio Rezende", "Queiroz", , "luciorqueiroz@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6090-1834"))
@@ -11,15 +11,17 @@ URL: https://github.com/marchionniLab/pathml,
     https://marchionnilab.github.io/pathml/
 BugReports: https://github.com/marchionniLab/pathml/issues
 Imports:
+    callr,
     cli,
     fs,
     reticulate,
+    rlang,
     stringr,
     withr
 Suggests:
     knitr,
     rmarkdown
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

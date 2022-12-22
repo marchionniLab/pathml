@@ -5,12 +5,15 @@ cli
 conda
 cre
 Farber
+fs
 github
 gmail
 https
+io
 knitr
 luciorqueiroz
 marchionniLab
+marchionnilab
 MERCHANTABILITY
 NONINFRINGEMENT
 ORCID
@@ -23,6 +26,7 @@ Rezende
 rmarkdown
 Roxygen
 RoxygenNote
+scalable
 stringr
 sublicense
 VignetteBuilder

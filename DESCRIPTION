@@ -1,6 +1,6 @@
 Package: pathml
 Title: A friendly toolkit for Computational Pathology
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R:
     person("Lucio Rezende", "Queiroz", , "luciorqueiroz@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6090-1834"))
@@ -14,6 +14,7 @@ Imports:
     callr,
     cli,
     fs,
+    glue,
     reticulate,
     rlang,
     stringr,

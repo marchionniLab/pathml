@@ -1,4 +1,5 @@
 #' Run Function in R Session
+#' @export
 callr_exec <- function(func, env_name = "pathml-r") {
   callr::r(
     func = \(func_name, env_name) {

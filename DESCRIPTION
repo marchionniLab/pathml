@@ -21,6 +21,8 @@ Imports:
     withr
 Suggests:
     knitr,
+    purrr,
+    readr,
     rmarkdown
 VignetteBuilder:
     knitr

@@ -10,10 +10,136 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
 ```{r setup}
 library(pathml)
+library(reticulate)
+
+callr::r(pathml::install_deps())
+
+env_name <- "pathml-r"
+reticulate::use_condaenv(
+  condaenv = env_name,
+  conda = "auto",
+  required = TRUE
+)
+pathml <- reticulate::import("pathml", convert = FALSE, delay_load = TRUE)
 ```
+
+```{r}
+download.file(
+  url =
+    "https://openslide.cs.cmu.edu/download/openslide-testdata/Aperio/CMU-1.svs",
+  destfile = "./data/CMU-1.svs"
+)
+my_image <- callr::r(
+  func = \() {
+    env_name <- "pathml-r"
+    reticulate::use_condaenv(
+      condaenv = env_name,
+      conda = "auto",
+      required = TRUE
+    )
+    pathml <- reticulate::import("pathml", convert = TRUE, delay_load = TRUE)
+    slide_x <- pathml$core$HESlide("./data/CMU-1.svs")
+    slide_x$extract_region(
+      location = reticulate::tuple(5000L, 5000L),
+      size = reticulate::tuple(500L, 500L)
+    )
+  }
+)
+
+my_image <- pathml$core$HESlide("./data/CMU-1.svs")
+
+region <- my_image$extract_region(
+  location = tuple(5000L, 5000L),
+  size = tuple(500L, 500L)
+)
+
+
+# for identifying/extracting a small region (tissue)
+region.shape
+```
+
+### Choosing macenko algorithm with returning hematoxylin only
+
+```{r}
+normalizer <- pathml$preprocessing$StainNormalizationHE(
+  target = "hematoxylin",
+  stain_estimation_method = "macenko"
+)
+# applying the job to the extracted region
+hematoxylin_output <- pathml$preprocessing$normalizer.F(region)
+```
+
+### present the output using matplotlip
+
+```{r}
+plt <- import("matplotlib.pyplot")
+plt.imshow(hematoxylin_output)
+plt.show()
+```
+
+## Check GPU support
+
+```{r}
+#| eval: false
+env_name <- "pathml-r"
+reticulate::use_condaenv(
+  condaenv = env_name,
+  conda = "auto",
+  required = TRUE
+)
+# False
+reticulate::py_str(
+  code = "import torch; print(torch.cuda.is_available())",
+  convert = FALSE
+)
+if (!isTRUE(Sys.which("nvidia-smi") == "")) {
+  query_gpu_str <- system(
+    command = "nvidia-smi",
+    intern = TRUE,
+    ignore.stderr = TRUE
+  )
+}
+
+reticulate::conda_install(
+  envname = env_name,
+  packages = "cudatoolkit=11.7"
+)
+torch <- reticulate::import("torch")
+torch$cuda$is_available()
+
+callr::r(
+  func = \() {
+    env_name <- "pathml-r"
+    reticulate::conda_install(
+      envname = env_name,
+      packages = "pytorch==1.10.1"
+    )
+  }
+)
+callr::r(
+  func = \() {
+    env_name <- "pathml-r"
+    reticulate::conda_install(
+      envname = env_name,
+      packages = "torch",
+      pip = TRUE
+    )
+  }
+)
+```
+
+## Advanced examples
+
+### Multiparametric Imaging: CODEX
+
+<https://pathml.readthedocs.io/en/latest/examples/link_codex.html>
+
+
+**Moved to separate vignette**

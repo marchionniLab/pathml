@@ -12,6 +12,7 @@ PathML is a toolbox to facilitate machine learning workflows for high-resolution
 Useful links:
 \itemize{
   \item \url{https://github.com/marchionniLab/pathml}
+  \item \url{https://marchionnilab.github.io/pathml/}
   \item Report bugs at \url{https://github.com/marchionniLab/pathml/issues}
 }
 

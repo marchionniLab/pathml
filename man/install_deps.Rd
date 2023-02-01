@@ -4,11 +4,13 @@
 \alias{install_deps}
 \title{Install pathml System Dependencies}
 \usage{
-install_deps(env_name = "pathml-r")
+install_deps(env_name = "pathml-r", rebuild = FALSE)
 }
 \arguments{
 \item{env_name}{(optional) name of conda environment to install
-dependencies into.}
+dependencies into. Default is \code{pathml-r}.}
+
+\item{rebuild}{(optional) rebuild the conda environment. Default is \code{FALSE}.}
 }
 \description{
 This function installs the system dependencies for pathml.

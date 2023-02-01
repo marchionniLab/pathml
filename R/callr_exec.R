@@ -1,5 +1,5 @@
 #' Run Function in R Session
-#' @internal
+#' @noRd
 callr_exec <- function(func, env_name = "pathml-r") {
   callr::r(
     func = \(func_name, env_name) {
@@ -7,7 +7,7 @@ callr_exec <- function(func, env_name = "pathml-r") {
       withr::local_envvar(list(RETICULATE_CONDA = NULL))
       withr::local_envvar(list(RETICULATE_MINICONDA_PATH = NULL))
       withr::local_envvar(list(RETICULATE_PYTHON = NULL))
-      withr::local_envvar(list(RETICULATE_PYTHON = NULL))
+      withr::local_envvar(list(RENV_PYTHON = NULL))
       rlang::exec(.fn = func_name, env_name)
     },
     args = list(func_name = func, env_name = env_name),

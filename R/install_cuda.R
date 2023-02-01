@@ -26,9 +26,9 @@ install_cuda_fun <- function(env_name = "pathml-r") {
   # + if system fails.
   cuda_version <- sys_output |>
     stringr::str_extract("CUDA Version\\s+:\\s+[0-9]+\\.[0-9]+") |>
-    na.omit() |>
+    stats::na.omit() |>
     as.character() |>
-    head(1) |>
+    utils::head(1) |>
     stringr::str_extract("[0-9]+\\.[0-9]+")
   reticulate::conda_install(
     envname = env_name,
